@@ -1,9 +1,4 @@
 package codigo;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java_cup.runtime.Symbol;
-import JFlex.sym;
 import static codigo.token.*;
 
 /* SECCION DE DECLARACIONES DE JFLEX */ 
@@ -117,13 +112,7 @@ numero = ("(-"{D}+")")|{D}+
 <YYINITIAL> "numDec" {c.linea=yyline;lexeme=yytext(); return t_dato; }
 <YYINITIAL> "numDecL" {c.linea=yyline;lexeme=yytext(); return t_dato; }
 <YYINITIAL> "elemento" {c.linea=yyline;lexeme=yytext(); return t_dato; }
-<YYINITIAL> "cad" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
-<YYINITIAL> "bool" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
-<YYINITIAL> "ent" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
-<YYINITIAL> "numDec" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
-<YYINITIAL> "numDecL" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
-<YYINITIAL> "elemento" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
-/* PALABRAS RESERVADAS */
+
 <YYINITIAL> "inicio" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
 <YYINITIAL> "programa" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
 <YYINITIAL> "fin" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
