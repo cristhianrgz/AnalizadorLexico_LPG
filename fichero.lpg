@@ -1,1 +1,106 @@
-@dsfgfgfg
+inicio;
+montar LLDG*;
+
+programa circunferencia (ent r,ent h=0,ent k=0,ent r=0,ent g=0,ent b=0){
+    LGColor3f(r,g,b);
+    ent x = 0;
+    ent y = r;
+    ent dpk = 3 - 2*r;
+    LGEmpezar(LG_Puntos);
+    hacer{
+        LGVertice2i(-y+h,x+k);
+        LGVertice2i(y+h,x+k);
+        LGVertice2i(y+h,-x+k);
+        LGVertice2i(-y+h,-x+k);
+        LGVertice2i(x+h,y+k);
+        LGVertice2i(x+h,-y+k);
+        LGVertice2i(-x+h,-y+k);
+        LGVertice2i(-x+h,y+k);
+        si(dpk >= 0){
+            dpk += 4*(x-y) + 10;
+            y -=1;
+        }
+        sino{
+            dpk = dpk + 4*x + 6;
+        x += 1;
+        }
+    } mientras (x <= y);
+    LGTerminar();
+  }  
+programa frec(ent r,ent h=0,ent k=0,ent r=0,ent g=0,ent b=0){
+    LGColor3f(r,g,b);
+    ent x = 0;
+    ent y = r;
+    ent dpk = 3 - 2*r;
+    LGEmpezar(LG_Puntos);
+    hacer{
+        LGVertice2i(x+h,y+k);
+        LGVertice2i(-x+h,y+k);
+        si(dpk >= 0){
+            dpk += 4*(x-y) + 10;
+            y -=1;
+        }sino{
+            dpk = dpk + 4*x + 6;
+        x += 1;
+    }
+    } mientras (x <= y);
+    LGTerminar()
+
+programa ejes(){
+    LGColor3f(0.0,0.0,0.0);
+    LGEmpezar(LG_Puntos);
+    hacer{
+        LGVertice2i(i,0);
+        LGVertice2i(0,i);
+   }mientras(i>=-250 && i<=251);
+    LGTerminar()
+    
+programa display(){
+    LGlimpiarBuffer(color_Buffer_Bit);
+    ejes();
+    LGColor3f(0.0,0.0,0.0);
+    hacer{
+        circunferencia(ent r,0,0,ent r=1);
+    }mientras(r>0 && r<20);
+    hacer{    
+        frec(r1,0,0,g=1);
+    }mientras(r1>30 && r1<50);
+    hacer{    
+        frec(r1,0,0,b=1);
+    }mientras(r1>60 && r1<80);
+    hacer{    
+        frec(r1,0,0,g=1);
+    }mientras(r1>90&&r1<110);
+    hacer{
+        frec(r1,0,0,b=1);
+    }mientras(r1>120&&r1<140);
+    hacer{
+        frec(r1,0,0,g=1);
+    }mientras(r1<150&&r1<170)
+    LGEjecucionLineas();
+}
+    
+programa reshape(newWinW,newWinH){
+    LGVentana(0,0,newWinW,newWinH);
+    LGModoMatriz(LG_Proyeccion);
+    LGMatrizIdentidad();
+    LGMatrizOrtografica(-newWinW/2,newWinH/2,-newWinH/2,newWinH/2);
+}
+/*------------------------------*/
+orden_principal(){
+ ent winW = 500;
+ ent winH = 500;
+ numDec xMin = -winW/2;
+ numDec xMax = -winW/2;
+ numDec yMin = -winW/2;
+ numDec yMax = -winW/2;
+ LGModoVisualizacion(LG_Solo LG_RGB);
+ LGPosicionVentanaInicio(100,100);
+ LGTamañoVentanaInicio(500,500);
+ LGCrearVentana(b"wi-fi");
+ lglimpiarBufferColor(1.0,1.0,1.0,0.0);
+ LGMostrarFuncion(display);
+ LGRemodeladoFuncion(reshape);
+ LGLazoPrincipal();
+}
+fin;

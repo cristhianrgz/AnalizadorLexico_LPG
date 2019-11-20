@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -440,7 +440,7 @@ public class VenPrincipal extends javax.swing.JFrame {
                       panelNum.setText(documento);
                   }
                   else{
-                    showMessageDialog(null,"No se pudo abrir el archivo seleccionado ","ERROR",JOptionPane.ERROR_MESSAGE);
+                    showMessageDialog(null,"No se pudo abrir el archivo seleccionado,\nsolo se permiten archivos \".lpg\"","ERROR",JOptionPane.ERROR_MESSAGE);
                   }
               }
             }catch(Exception ex){}
@@ -511,7 +511,7 @@ public class VenPrincipal extends javax.swing.JFrame {
                     showMessageDialog(null,mensaje,"EXITO",JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
-                    showMessageDialog(null,"No se pudo guardar el archivo","ERROR",JOptionPane.ERROR_MESSAGE);
+                    showMessageDialog(null,"No se pudo guardar el archivo,\nsolo se permiten archivos \".lpg\"","ERROR",JOptionPane.ERROR_MESSAGE);
                 }
             }
             else{

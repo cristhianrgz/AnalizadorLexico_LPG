@@ -13,7 +13,7 @@ import java.io.File;
  */
 public class Principal {
     public static void main(String[] args) {
-        String ruta = "C:/Users/criss/OneDrive/Documentos/NetBeansProjects/AnalizadorLexicoLPG/src/codigo/lexer.flex";
+        String ruta = "C:/Users/migue/Documents/NetBeansProjects/AnalizadorLexico_LPG/src/codigo/lexer.flex";
         generarLexer(ruta);
     }
     
