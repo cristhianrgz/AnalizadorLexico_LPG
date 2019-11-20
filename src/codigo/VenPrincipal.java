@@ -207,11 +207,11 @@ public class VenPrincipal extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 728, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 35, Short.MAX_VALUE)
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -234,7 +234,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Analizar, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
+            .addComponent(Analizar, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
         );
 
         tbtokens.setModel(new javax.swing.table.DefaultTableModel(
@@ -276,10 +276,10 @@ public class VenPrincipal extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(11, 11, 11)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -298,11 +298,13 @@ public class VenPrincipal extends javax.swing.JFrame {
         MnuBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         MnuBar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
+        Archivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/anadir.png"))); // NOI18N
         Archivo.setText("Archivo");
         Archivo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         Nuevo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         Nuevo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Nuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agregar-documentos.png"))); // NOI18N
         Nuevo.setText("Nuevo");
         Nuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -313,6 +315,7 @@ public class VenPrincipal extends javax.swing.JFrame {
 
         Abrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
         Abrir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Abrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/abrir-documento.png"))); // NOI18N
         Abrir.setText("Abrir");
         Abrir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -323,6 +326,7 @@ public class VenPrincipal extends javax.swing.JFrame {
 
         Guardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.CTRL_MASK));
         Guardar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/expediente.png"))); // NOI18N
         Guardar.setText("Guardar");
         Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -333,6 +337,7 @@ public class VenPrincipal extends javax.swing.JFrame {
 
         GuardarComo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         GuardarComo.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        GuardarComo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guardar.png"))); // NOI18N
         GuardarComo.setText("Guardar como");
         GuardarComo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -343,6 +348,7 @@ public class VenPrincipal extends javax.swing.JFrame {
 
         Salir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
         Salir.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logout.png"))); // NOI18N
         Salir.setText("Salir");
         Salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -353,11 +359,13 @@ public class VenPrincipal extends javax.swing.JFrame {
 
         MnuBar.add(Archivo);
 
+        tablas_simbolos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tabla.png"))); // NOI18N
         tablas_simbolos.setText("Tablas de Simbólos");
         tablas_simbolos.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         go_PR.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
         go_PR.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        go_PR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/palabras-clave.png"))); // NOI18N
         go_PR.setText("Palabras Reservadas");
         go_PR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -368,6 +376,7 @@ public class VenPrincipal extends javax.swing.JFrame {
 
         go_ID.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
         go_ID.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        go_ID.setIcon(new javax.swing.ImageIcon(getClass().getResource("/votante.png"))); // NOI18N
         go_ID.setText("Identificadores");
         go_ID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -378,8 +387,14 @@ public class VenPrincipal extends javax.swing.JFrame {
 
         MnuBar.add(tablas_simbolos);
 
+        Compilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/play.png"))); // NOI18N
         Compilar.setText("Compilar");
         Compilar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        Compilar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CompilarActionPerformed(evt);
+            }
+        });
 
         jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -404,7 +419,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -592,14 +607,18 @@ public class VenPrincipal extends javax.swing.JFrame {
             }
             System.out.println(cadena);
         }
-        }
+        }*/
 
     }//GEN-LAST:event_AnalizarMouseClicked
+
+    private void CompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompilarActionPerformed
+       analizarCod();
+    }//GEN-LAST:event_CompilarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -731,7 +750,7 @@ public class VenPrincipal extends javax.swing.JFrame {
                   
           }
           if(ResultError.equals("")){
-                    txtaSalida.setText(" \n* El análisis se ha completado correctamente * ");
+                    txtaSalida.setText(" \n  * El análisis se ha completado correctamente * ");
                     txtaSalida.setForeground(new Color(73,156,34));
 
                     
