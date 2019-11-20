@@ -526,7 +526,7 @@ public class VenPrincipal extends javax.swing.JFrame {
                 }
             }
             else{
-                showMessageDialog(null,"Solo se permiten archivos con extensión .txt","ERROR",JOptionPane.ERROR_MESSAGE);
+                showMessageDialog(null,"Solo se permiten archivos con extensión .lpg","ERROR",JOptionPane.ERROR_MESSAGE);
             }
         }
     }
@@ -694,9 +694,7 @@ public class VenPrincipal extends javax.swing.JFrame {
               case op_relacional: 
                     tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
                   break;
-              /* Numero */
 
-                  //("(-"{D}+")")|{D}+|[0-9]+[.][0-9]+ {lexeme=yytext(); return Numero;}
               case op_asignacion: 
                     tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
                   break;
