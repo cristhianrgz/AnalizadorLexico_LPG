@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FileDialog;
 import java.awt.Font;
+import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,7 +56,7 @@ public class VenPrincipal extends javax.swing.JFrame {
     final Color entryBg;
     public static int linea;
     public static String token;
-    Font font = new Font("Arial", Font.BOLD, 14);
+    Font font = new Font("Consolas", Font.BOLD, 14);
     DefaultTableModel tokens;
     
     //Para tabla de id
@@ -66,9 +67,11 @@ public class VenPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setTitle("IDE - LPG");
         this.getContentPane().setBackground(Color.WHITE);
+        Font font = new Font("Consolas", Font.PLAIN, 14);
+        panelNum.setFont(font);
         
+        //Creación de tabla de Tokens
         tokens = (DefaultTableModel) tbtokens.getModel();
-
         tokens.addColumn("No.Linea");
         tokens.addColumn("Lexema");
         tokens.addColumn("Comp_Lexico"); 
@@ -88,6 +91,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         panelNum.setHighlighter(hilit);
         entryBg = panelNum.getBackground();
     }
+   
     
     //MANEJO DE ARCHIVOS
     //GUARDAR ARCHIVO
@@ -154,9 +158,13 @@ public class VenPrincipal extends javax.swing.JFrame {
         go_PR = new javax.swing.JMenuItem();
         go_ID = new javax.swing.JMenuItem();
         Compilar = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -390,22 +398,11 @@ public class VenPrincipal extends javax.swing.JFrame {
         Compilar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/play.png"))); // NOI18N
         Compilar.setText("Compilar");
         Compilar.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        Compilar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CompilarActionPerformed(evt);
+        Compilar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CompilarMouseClicked(evt);
             }
         });
-
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jMenuItem3.setText("Analisis");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        Compilar.add(jMenuItem3);
-
         MnuBar.add(Compilar);
 
         setJMenuBar(MnuBar);
@@ -488,27 +485,6 @@ public class VenPrincipal extends javax.swing.JFrame {
     private void go_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_IDActionPerformed
         new TablaID().setVisible(true);
     }//GEN-LAST:event_go_IDActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        
-       /* if(seleccionar.showDialog(null, "Guardar como") == JFileChooser.APPROVE_OPTION){
-            archivo=seleccionar.getSelectedFile();
-            if(archivo.getName().endsWith("lpg")){
-                String documento = panelNum.getText();
-                String mensaje = guardarArchivo(archivo, documento);
-                if(mensaje != null){
-                    showMessageDialog(null,mensaje,"EXITO",JOptionPane.INFORMATION_MESSAGE);
-                }
-                else{
-                    showMessageDialog(null,"No se pudo guardar el archivo","ERROR",JOptionPane.ERROR_MESSAGE);
-                }
-            }
-            else{
-                showMessageDialog(null,"Solo se permiten archivos con extensión .lpg","ERROR",JOptionPane.ERROR_MESSAGE);
-            }
-        } */        
-        analizarCod();
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
     
     //Función analizar
     public void analizarCod(){
@@ -611,9 +587,14 @@ public class VenPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_AnalizarMouseClicked
 
-    private void CompilarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CompilarActionPerformed
-       analizarCod();
-    }//GEN-LAST:event_CompilarActionPerformed
+    private void CompilarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CompilarMouseClicked
+         analizarCod();// TODO add your handling code here:
+    }//GEN-LAST:event_CompilarMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+       
+       JOptionPane.showConfirmDialog(null, "Realmente desea salir de Hola Swing?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -772,7 +753,6 @@ public class VenPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem go_PR;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
