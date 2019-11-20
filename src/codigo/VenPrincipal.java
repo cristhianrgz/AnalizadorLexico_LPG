@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.FileDialog;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,6 +29,7 @@ import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
 import javafx.stage.FileChooser;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -69,6 +71,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         this.getContentPane().setBackground(Color.WHITE);
         Font font = new Font("Consolas", Font.PLAIN, 14);
         panelNum.setFont(font);
+        cerrar();
         
         //Creación de tabla de Tokens
         tokens = (DefaultTableModel) tbtokens.getModel();
@@ -160,11 +163,6 @@ public class VenPrincipal extends javax.swing.JFrame {
         Compilar = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
 
         jPanel1.setBackground(new java.awt.Color(0, 51, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -591,11 +589,26 @@ public class VenPrincipal extends javax.swing.JFrame {
          analizarCod();// TODO add your handling code here:
     }//GEN-LAST:event_CompilarMouseClicked
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-       
-       JOptionPane.showConfirmDialog(null, "Realmente desea salir de Hola Swing?", "Confirmar salida", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-    }//GEN-LAST:event_formWindowClosing
-
+    public void cerrar(){
+        try {
+            this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+            addWindowListener(new WindowAdapter(){
+               public void windowClosing(WindowEvent e) {
+                   confirmarSalida();
+               }
+            });
+            this.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void confirmarSalida(){
+        int valor= JOptionPane.showConfirmDialog(this,"  ¿Quieres salir del programa? \nSe perderán todos los cambios realizados.", "Salir...",JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (valor==JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
