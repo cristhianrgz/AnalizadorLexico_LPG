@@ -8,7 +8,7 @@ import static codigo.token.*;
 %line
 %char
 %column
-L=[a-zA-Z]+
+L=[a-zA-Z_]+
 Lm=[a-z]+
 D=[0-9]+
 espacio=[ ,\t,\r]+
@@ -16,8 +16,6 @@ espacio=[ ,\t,\r]+
 public String lexeme;
 guardarInfoCod c = new guardarInfoCod();
 %}
-
-numero = ("(-"{D}+")")|{D}+
 
 /* EXPRESIONES REGULARES VALIDAS PARA CADENAS */
 
@@ -94,26 +92,14 @@ numero = ("(-"{D}+")")|{D}+
 
 <YYINITIAL> ";" {c.linea=yyline;lexeme=yytext(); return p_coma; }
 
-<YYINITIAL> "." {c.linea=yyline;lexeme=yytext(); return simbol_p; }
-
 <YYINITIAL> "," {c.linea=yyline;lexeme=yytext(); return simbol_p; }
 
 <YYINITIAL> ":" {c.linea=yyline;lexeme=yytext(); return dos_puntos; }
 
-/* Identificador */
-<YYINITIAL> {Lm}({L}|{D})* {c.linea=yyline;lexeme=yytext(); return identificador; }
-
 /* Numero */
-<YYINITIAL> {numero} {c.linea=yyline;lexeme=yytext(); return numero; }
+<YYINITIAL> ("(-"{D}+")")|{D}+|[0-9]+[.][0-9]+ {c.linea=yyline;lexeme=yytext(); return numero; }
 
-<YYINITIAL> "cad" {c.linea=yyline;lexeme=yytext(); return t_dato; }
-<YYINITIAL> "bool" {c.linea=yyline;lexeme=yytext(); return t_dato; }
-<YYINITIAL> "ent" {c.linea=yyline;lexeme=yytext(); return t_dato; }
-<YYINITIAL> "numDec" {c.linea=yyline;lexeme=yytext(); return t_dato; }
-<YYINITIAL> "numDecL" {c.linea=yyline;lexeme=yytext(); return t_dato; }
-<YYINITIAL> "elemento" {c.linea=yyline;lexeme=yytext(); return t_dato; }
-
-<YYINITIAL> "inicio" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
+<YYINITIAL> inicio {c.linea=yyline;lexeme=yytext(); return p_reservada; }
 <YYINITIAL> "programa" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
 <YYINITIAL> "fin" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
 <YYINITIAL> "montar" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
@@ -191,7 +177,14 @@ numero = ("(-"{D}+")")|{D}+
 <YYINITIAL> "LG_MuestreoMultiple" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
 <YYINITIAL> "LG_Estereo" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
 <YYINITIAL> "LG_Luminosa" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
+<YYINITIAL> "cad" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
+<YYINITIAL> "bool" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
+<YYINITIAL> "ent" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
+<YYINITIAL> "numDec" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
+<YYINITIAL> "numDecL" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
+<YYINITIAL> "elemento" {c.linea=yyline;lexeme=yytext(); return p_reservada; }
 
+<YYINITIAL> {Lm}({L}|{D})* {c.linea=yyline;lexeme=yytext(); return identificador; }
 
 
 /* ERRORES PARA EL LENGUAJE */

@@ -58,12 +58,17 @@ public class VenPrincipal extends javax.swing.JFrame {
     Font font = new Font("Arial", Font.BOLD, 14);
     DefaultTableModel tokens;
     
+    //Para tabla de id
+    public static ArrayList<String> ids = new ArrayList<String>();  
+
+    
     public VenPrincipal() {
         initComponents();
         this.setTitle("IDE - LPG");
         this.getContentPane().setBackground(Color.WHITE);
         
         tokens = (DefaultTableModel) tbtokens.getModel();
+
         tokens.addColumn("No.Linea");
         tokens.addColumn("Lexema");
         tokens.addColumn("Comp_Lexico"); 
@@ -164,6 +169,7 @@ public class VenPrincipal extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 51, 102));
         jLabel1.setText("Salida - Analizador Léxico LPG");
 
+        txtaSalida.setEditable(false);
         txtaSalida.setColumns(20);
         txtaSalida.setRows(5);
         txtaSalida.setBorder(null);
@@ -407,18 +413,10 @@ public class VenPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoActionPerformed
-        //MODIFICAR
-        if(!(panelNum.getText().equals(""))){
-            if(evt.getActionCommand().equalsIgnoreCase("Nuevo"))
-            {
-                //JOptionPane.showMessageDialog(null, archivo.escribir_archivo(txtaCodigo.getText()));
-            }//if
-        }
-        else{
-            panelNum.setText("");}
-            panelNum.setText("");
-            tokens.setRowCount(0);
-//        errores.clear();
+
+        panelNum.setText("");
+        panelNum.setText("");
+        tokens.setRowCount(0);
         txtaSalida.setText("");
     }//GEN-LAST:event_NuevoActionPerformed
 
@@ -427,7 +425,7 @@ public class VenPrincipal extends javax.swing.JFrame {
             try{
               archivo = seleccionar.getSelectedFile();
               if(archivo.canRead()){
-                  if(archivo.getName().endsWith("txt")){
+                  if(archivo.getName().endsWith("lpg")){
                       String documento = abrirArchivo(archivo);
                       panelNum.setText(documento);
                   }
@@ -443,7 +441,7 @@ public class VenPrincipal extends javax.swing.JFrame {
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         if(seleccionar.showDialog(null, "Guardar") == JFileChooser.APPROVE_OPTION){
             archivo=seleccionar.getSelectedFile();
-            if(archivo.getName().endsWith("txt")){
+            if(archivo.getName().endsWith("lpg")){
                 String documento = panelNum.getText();
                 String mensaje = guardarArchivo(archivo, documento);
                 if(mensaje != null){
@@ -454,28 +452,13 @@ public class VenPrincipal extends javax.swing.JFrame {
                 }
             }
             else{
-                showMessageDialog(null,"Solo se permiten archivos con extensión .txt","ERROR",JOptionPane.ERROR_MESSAGE);
+                showMessageDialog(null,"Solo se permiten archivos con extensión .lpg","ERROR",JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void GuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarComoActionPerformed
-        if(seleccionar.showDialog(null, "Guardar como") == JFileChooser.APPROVE_OPTION){
-            archivo=seleccionar.getSelectedFile();
-            if(archivo.getName().endsWith("txt")){
-                String documento = panelNum.getText();
-                String mensaje = guardarArchivo(archivo, documento);
-                if(mensaje != null){
-                    showMessageDialog(null,mensaje,"EXITO",JOptionPane.INFORMATION_MESSAGE);
-                }
-                else{
-                    showMessageDialog(null,"No se pudo guardar el archivo","ERROR",JOptionPane.ERROR_MESSAGE);
-                }
-            }
-            else{
-                showMessageDialog(null,"Solo se permiten archivos con extensión .txt","ERROR",JOptionPane.ERROR_MESSAGE);
-            }
-        }
+            guardarArchivo();
     }//GEN-LAST:event_GuardarComoActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
@@ -488,11 +471,32 @@ public class VenPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_go_PRActionPerformed
 
     private void go_IDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_go_IDActionPerformed
-        //new TablaID().setVisible(true);
+        new TablaID().setVisible(true);
     }//GEN-LAST:event_go_IDActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-           //Opción analizar del menú.
+        
+       /* if(seleccionar.showDialog(null, "Guardar como") == JFileChooser.APPROVE_OPTION){
+            archivo=seleccionar.getSelectedFile();
+            if(archivo.getName().endsWith("lpg")){
+                String documento = panelNum.getText();
+                String mensaje = guardarArchivo(archivo, documento);
+                if(mensaje != null){
+                    showMessageDialog(null,mensaje,"EXITO",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    showMessageDialog(null,"No se pudo guardar el archivo","ERROR",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else{
+                showMessageDialog(null,"Solo se permiten archivos con extensión .lpg","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+        } */        
+        analizarCod();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    
+    //Función analizar
+    public void analizarCod(){
         txtaSalida.setText("");
         tokens.setRowCount(0);  
         if(panelNum.getText().equals("")){
@@ -505,9 +509,27 @@ public class VenPrincipal extends javax.swing.JFrame {
                System.out.println(ex.getMessage());
            }
         }
-        
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
+    }
+    
+    //Función guardarArchivo
+    public void guardarArchivo(){
+        if(seleccionar.showDialog(null, "Guardar como") == JFileChooser.APPROVE_OPTION){
+            archivo=seleccionar.getSelectedFile();
+            if(archivo.getName().endsWith("lpg")){
+                String documento = panelNum.getText();
+                String mensaje = guardarArchivo(archivo, documento);
+                if(mensaje != null){
+                    showMessageDialog(null,mensaje,"EXITO",JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    showMessageDialog(null,"No se pudo guardar el archivo","ERROR",JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else{
+                showMessageDialog(null,"Solo se permiten archivos con extensión .txt","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
     private void AnalizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnalizarMouseClicked
         /*if(flArchivo.exists())
         {
@@ -612,7 +634,7 @@ public class VenPrincipal extends javax.swing.JFrame {
     
     public void probarLexer() throws IOException {
       guardarInfoCod c = new guardarInfoCod();
-      File fichero = new File("fichero.txt");
+      File fichero = new File("fichero.lpg");
       PrintWriter writer;
       try{
           writer = new PrintWriter(fichero);
@@ -622,7 +644,7 @@ public class VenPrincipal extends javax.swing.JFrame {
           Logger.getLogger(VenPrincipal.class.getName()).log(Level.SEVERE,null,ex);
       }
       Reader reader;
-      reader = new BufferedReader(new FileReader("fichero.txt"));
+      reader = new BufferedReader(new FileReader("fichero.lpg"));
       lexer lex = new lexer(reader);
       String Resultado = "";
       String ResultError = "";
@@ -632,6 +654,7 @@ public class VenPrincipal extends javax.swing.JFrame {
               Resultado = Resultado +"FIN";
               return;
           }
+          
           switch(tok){
               case ERROR:
                   ResultError = ResultError +"* ERROR LEXICO 1. En la linea "+(c.linea+1)+".  El símbolo: [ "+lex.lexeme+" ]  NO ES VALIDO para el Lenguaje (LPG) *"+"\n";
@@ -639,13 +662,75 @@ public class VenPrincipal extends javax.swing.JFrame {
                   txtaSalida.setForeground(Color.RED);
                   break;
 
-              case p_reservada: case t_dato: case numero: case identificador: case op_aritmetico: case op_incremento: case op_decremento: case comillas: case op_logico:
-              case op_relacional: case op_asignacion: case simbol_p: case p_coma: case otros: case parentesis_a: case parentesis_c: case corchete_a: case corchete_c:
-              case llave_a: case llave_c: case dos_puntos:
-                  
+              case p_reservada: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case t_dato: 
+                   tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case numero: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case identificador: 
+                   tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                   ids.add(lex.lexeme);
+                  break;        
+              case op_aritmetico: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                    
+                  break;
+              case op_incremento: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case op_decremento: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case comillas: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case op_logico:
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case op_relacional: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              /* Numero */
+
+                  //("(-"{D}+")")|{D}+|[0-9]+[.][0-9]+ {lexeme=yytext(); return Numero;}
+              case op_asignacion: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case simbol_p: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case p_coma: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case otros: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case parentesis_a: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case parentesis_c: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case corchete_a: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case corchete_c:
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case llave_a: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case llave_c: 
+                    tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
+                  break;
+              case dos_puntos:
                   tokens.addRow(new Object[]{(c.linea+1),lex.lexeme,tok});
                   break;
-              
+                  
           }
           if(ResultError.equals("")){
                     txtaSalida.setText(" \n* El análisis se ha completado correctamente * ");
